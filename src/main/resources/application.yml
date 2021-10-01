@@ -1,3 +1,13 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+
+simbot:
+  core:
+    bot-resource-type: resource_first
+  component:
+    mirai:
+      message:
+        cache:
+          enable: true
+      device-info-file: src/main/resources/device.json

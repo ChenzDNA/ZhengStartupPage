@@ -33,3 +33,5 @@ build/
 .vscode/
 #/src/main/resources/application.yml
 /src/test/
+/src/main/resources/simbot-bots/milt.bot
+/.commit-template.json
