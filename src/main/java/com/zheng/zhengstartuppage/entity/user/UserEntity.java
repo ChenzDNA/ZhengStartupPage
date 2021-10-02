@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class UserEntity extends BaseEntity {
 
-    Long id;
+    long id;
 
     String account;
 

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class BaseEntity {
 
-    Long ctime;
+    long ctime;
 
-    Long mtime;
+    long mtime;
 }

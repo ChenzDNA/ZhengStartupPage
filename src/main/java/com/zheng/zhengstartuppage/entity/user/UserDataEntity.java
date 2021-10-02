@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Data
 public class UserDataEntity extends BaseEntity {
 
-    Long id;
+    long id;
 
-    Long userId;
+    long userId;
 
     String nickname;
 
@@ -27,5 +27,5 @@ public class UserDataEntity extends BaseEntity {
 
     Integer catDisplay;
 
-    Long lastLoginTime;
+    long lastLoginTime;
 }
