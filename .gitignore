@@ -35,3 +35,4 @@ build/
 /src/test/
 /src/main/resources/simbot-bots/milt.bot
 /.commit-template.json
+/src/main/resources/static/test.html

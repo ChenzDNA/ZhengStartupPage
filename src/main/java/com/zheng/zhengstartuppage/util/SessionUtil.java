@@ -30,4 +30,15 @@ public class SessionUtil {
     public static UserEntity getUser() {
         return (UserEntity) httpSession.getAttribute("User");
     }
+
+    public static String getUserToken() {
+        return (String) httpSession.getAttribute("SessionToken");
+    }
+
+    public static boolean isLogin() {
+        if (httpSession == null) {
+            return false;
+        }
+        return httpSession.getAttribute("User") != null;
+    }
 }

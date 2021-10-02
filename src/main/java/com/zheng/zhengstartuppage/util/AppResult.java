@@ -35,13 +35,15 @@ public class AppResult {
     }
 
     public AppResult grab(Object data) {
-        this.data.put(getObjectClass(data), data);
+        this.data.put(getObjectClassName(data), data);
         return this;
     }
 
-    private String getObjectClass(Object obj) {
+    private String getObjectClassName(Object obj) {
         String[] classPath = obj.getClass().toString().split("\\.");
-        return classPath[classPath.length - 1];
+        String className = classPath[classPath.length - 1];
+        className = className.substring(0, 1).toLowerCase() + className.substring(1);
+        return className.substring(0, className.length() - 6);
     }
 
     public static AppResult success() {
