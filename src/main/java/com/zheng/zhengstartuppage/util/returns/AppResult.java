@@ -41,6 +41,8 @@ public class AppResult {
     }
 
     public AppResult grabAll(ReturnsData returnsData) {
+        if (returnsData.getData() == null)
+            return fail(returnsData.getMessage());
         this.data.putAll(returnsData.getData());
         return this;
     }

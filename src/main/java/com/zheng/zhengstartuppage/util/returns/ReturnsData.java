@@ -9,11 +9,14 @@ import java.util.Map;
 /**
  * @author : 陈征
  * @date : 2021-10-03 20:15
+ * 只供 service 层使用。
  */
 
 @Data
 public class ReturnsData {
     private Map<String, Object> data;
+
+    private String message;
 
     private ReturnsData(Object... objects) throws IllegalResultClassException {
         this.data = new HashMap<>();
@@ -22,7 +25,15 @@ public class ReturnsData {
         }
     }
 
+    private ReturnsData(String message) {
+        this.message = message;
+    }
+
     public static ReturnsData returns(Object... objects) throws IllegalResultClassException {
         return new ReturnsData(objects);
+    }
+
+    public static ReturnsData returns(String message){
+        return new ReturnsData(message);
     }
 }
