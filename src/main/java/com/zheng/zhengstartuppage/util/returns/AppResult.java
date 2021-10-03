@@ -49,7 +49,7 @@ public class AppResult {
         String[] classPath = obj.getClass().toString().split("\\.");
         String className = classPath[classPath.length - 1];
         className = className.substring(0, 1).toLowerCase() + className.substring(1);
-        if ("Entity".equals(className.substring(className.length() - 6)))
+        if (!"Entity".equals(className.substring(className.length() - 6)))
             throw new IllegalResultClassException("非法的类型");
         return className.substring(0, className.length() - 6);
     }
