@@ -1,6 +1,6 @@
 package com.zheng.zhengstartuppage.util;
 
-import com.zheng.zhengstartuppage.util.annotation.LoginMethod;
+import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.http.Cookie;
@@ -11,30 +11,41 @@ import javax.servlet.http.Cookie;
  */
 
 public class CookieUtil {
+    public static String splitMark = "#&$&#";
+
     public static Cookie generateUserCookie() {
-        Cookie cookie = new Cookie("U", SessionUtil.getUserToken());
+        Cookie cookie = new Cookie("U", SessionUtil.getUser().getId() + splitMark + SessionUtil.getUserToken());
         cookie.setPath("/");
         cookie.setMaxAge(30 * 24 * 60 * 60);
         cookie.setHttpOnly(true);
         return cookie;
     }
 
-    public static boolean verifyCookie(Cookie[] cookies, HandlerMethod handlerMethod) {
-        if (!hasUserCookie(cookies)) {
-            return handlerMethod.hasMethodAnnotation(LoginMethod.class);
-        }
-        return true;
+    public static Cookie generateUserCookie(UserEntity userEntity) {
+        Cookie cookie = new Cookie("U", userEntity.getId() + splitMark + SessionUtil.getUserToken());
+        cookie.setPath("/");
+        cookie.setMaxAge(30 * 24 * 60 * 60);
+        cookie.setHttpOnly(true);
+        return cookie;
     }
 
-    public static boolean hasUserCookie(Cookie[] cookies) {
-        if (cookies == null) {
-            return false;
+    public static Cookie verifyUserCookie(Cookie[] cookies) {
+        int index;
+        if ((index = hasUserCookie(cookies)) != -1) {
+            return cookies[index];
         }
-        for (Cookie cookie : cookies) {
-            if ("U".equals(cookie.getName())) {
-                return cookie.getName().equals(SessionUtil.getUserToken());
+        return null;
+    }
+
+    public static int hasUserCookie(Cookie[] cookies) {
+        if (cookies == null) {
+            return -1;
+        }
+        for (int i = 0; i < cookies.length; i++) {
+            if ("U".equals(cookies[i].getName())) {
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 }
