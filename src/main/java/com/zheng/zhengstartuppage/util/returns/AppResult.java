@@ -1,5 +1,6 @@
-package com.zheng.zhengstartuppage.util;
+package com.zheng.zhengstartuppage.util.returns;
 
+import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -34,15 +35,22 @@ public class AppResult {
         return this;
     }
 
-    public AppResult grab(Object data) {
+    public AppResult grab(Object data) throws IllegalResultClassException {
         this.data.put(getObjectClassName(data), data);
         return this;
     }
 
-    private String getObjectClassName(Object obj) {
+    public AppResult grabAll(ReturnsData returnsData) {
+        this.data.putAll(returnsData.getData());
+        return this;
+    }
+
+    public static String getObjectClassName(Object obj) throws IllegalResultClassException {
         String[] classPath = obj.getClass().toString().split("\\.");
         String className = classPath[classPath.length - 1];
         className = className.substring(0, 1).toLowerCase() + className.substring(1);
+        if ("Entity".equals(className.substring(className.length() - 6)))
+            throw new IllegalResultClassException("非法的类型");
         return className.substring(0, className.length() - 6);
     }
 
