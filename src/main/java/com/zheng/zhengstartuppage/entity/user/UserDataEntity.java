@@ -4,6 +4,8 @@ import com.zheng.zhengstartuppage.entity.BaseEntity;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Pattern;
+
 /**
  * @author : 陈征
  * @date : 2021-09-30 20:21
@@ -17,15 +19,18 @@ public class UserDataEntity extends BaseEntity {
 
     long userId;
 
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
     String nickname;
 
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
     String searchEngine;
 
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
     String cityName;
 
-    Integer secondDisplay;
+    int secondDisplay;
 
-    Integer catDisplay;
+    int catDisplay;
 
     long lastLoginTime;
 }
