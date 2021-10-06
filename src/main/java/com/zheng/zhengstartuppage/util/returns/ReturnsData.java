@@ -2,6 +2,7 @@ package com.zheng.zhengstartuppage.util.returns;
 
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
  * 只供 service 层使用。
  */
 
-@Data
+@Getter
 public class ReturnsData {
     private Map<String, Object> data;
 

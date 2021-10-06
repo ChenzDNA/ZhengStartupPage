@@ -2,6 +2,7 @@ package com.zheng.zhengstartuppage.util.returns;
 
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Map;
  * @date : 2021-09-30 21:05
  */
 
-@Data
+@Getter
 public class AppResult {
 
     private final Map<String, Object> data;
