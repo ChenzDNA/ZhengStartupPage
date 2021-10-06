@@ -6,6 +6,7 @@ import com.zheng.zhengstartuppage.util.annotation.LoginMethod;
 import com.zheng.zhengstartuppage.util.returns.AppResult;
 import com.zheng.zhengstartuppage.util.CookieUtil;
 import com.zheng.zhengstartuppage.util.SessionUtil;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -25,10 +26,17 @@ public class UrlInterceptor implements HandlerInterceptor {
     @Resource
     private UserModel userModel;
 
+    @Resource
+    private RedisTemplate<Object, Object> redisTemplate;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SessionUtil.setHttpSession(request.getSession());
-        SessionUtil.setIP(SessionUtil.getIpAddr(request));
+        String ip = SessionUtil.getIpAddr(request);
+        SessionUtil.setIP(ip);
+        if (redisTemplate.hasKey(ip)) {
+            redisTemplate.opsForValue().set(ip, 50);
+        }
 
         final ServletOutputStream out = response.getOutputStream();
         if (!(handler instanceof HandlerMethod handlerMethod)) {
