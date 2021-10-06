@@ -35,7 +35,7 @@ public class SessionUtil {
         return (String) httpSession.getAttribute("SessionToken");
     }
 
-    public static String getUserToken(UserEntity userEntity){
+    public static String getUserToken(UserEntity userEntity) {
         return hashToken(userEntity.getAccount() + userEntity.getPassword());
     }
 
