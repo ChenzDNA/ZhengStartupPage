@@ -4,6 +4,8 @@ import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author : 陈征
@@ -47,5 +49,13 @@ public class CookieUtil {
             }
         }
         return -1;
+    }
+
+    public static Cookie removeCookie() {
+        Cookie cookie = new Cookie("U", "");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        return cookie;
     }
 }
