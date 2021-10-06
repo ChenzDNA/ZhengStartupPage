@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -44,5 +45,27 @@ public class SessionUtil {
             return false;
         }
         return httpSession.getAttribute("User") != null;
+    }
+
+    public static void setIP(String ip) {
+        httpSession.setAttribute("IP", ip);
+    }
+
+    public static String getIp() {
+        return (String) httpSession.getAttribute("IP");
+    }
+
+    public static String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
     }
 }
