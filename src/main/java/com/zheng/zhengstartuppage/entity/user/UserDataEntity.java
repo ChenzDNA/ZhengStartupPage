@@ -33,4 +33,13 @@ public class UserDataEntity extends BaseEntity {
     int catDisplay;
 
     long lastLoginTime;
+
+    public UserDataEntity() {
+    }
+
+    public UserDataEntity(long userId, String nickname, long lastLoginTime) {
+        this.userId = userId;
+        this.nickname = nickname;
+        this.lastLoginTime = lastLoginTime;
+    }
 }
