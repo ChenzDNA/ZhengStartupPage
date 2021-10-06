@@ -28,6 +28,8 @@ public class UrlInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SessionUtil.setHttpSession(request.getSession());
+        SessionUtil.setIP(SessionUtil.getIpAddr(request));
+
         final ServletOutputStream out = response.getOutputStream();
         if (!(handler instanceof HandlerMethod handlerMethod)) {
             return true;
