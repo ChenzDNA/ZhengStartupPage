@@ -19,13 +19,13 @@ public class UserDataEntity extends BaseEntity {
 
     long userId;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
     String nickname;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
     String searchEngine;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]*")
+    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
     String cityName;
 
     int secondDisplay;

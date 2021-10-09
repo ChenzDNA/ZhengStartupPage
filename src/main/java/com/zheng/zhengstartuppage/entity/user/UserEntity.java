@@ -17,9 +17,9 @@ public class UserEntity extends BaseEntity {
 
     long id;
 
-    @Pattern(regexp = "[0-9a-zA-Z]*")
+    @Pattern(regexp = "[0-9a-zA-Z]{6,16}")
     String account;
 
-    @Pattern(regexp = "[0-9a-zA-Z]*")
+    @Pattern(regexp = "[0-9a-zA-Z]{6,16}")
     String password;
 }
