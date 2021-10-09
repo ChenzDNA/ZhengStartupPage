@@ -11,12 +11,20 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class WebApplicationContext implements ApplicationContextAware {
+public class WebApplicationContextConfig implements ApplicationContextAware {
 
     public static ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        WebApplicationContext.applicationContext = applicationContext;
+        WebApplicationContextConfig.applicationContext = applicationContext;
+    }
+
+    public static <T> T getBean(Class<T> clazz) {
+        return applicationContext.getBean(clazz);
+    }
+
+    public static <T> T getBean(String s, Class<T> clazz) {
+        return applicationContext.getBean(s, clazz);
     }
 }
