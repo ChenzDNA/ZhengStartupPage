@@ -18,7 +18,7 @@ public interface UserDao {
     long insertUser(UserEntity userEntity);
 
     @Insert("insert into " +
-            "user_data(user_id, nickname, searchEngine, city_name, second_display, cat_display, last_login_time, ctime, mtime) " +
+            "user_data(user_id, nickname, search_engine, city_name, second_display, cat_display, last_login_time, ctime, mtime) " +
             "value(#{userId}, #{nickname}, #{searchEngine}, #{cityName}, #{secondDisplay}, #{catDisplay}, #{lastLoginTime}, #{ctime}, #{mtime})")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     long insertUserData(UserDataEntity userEntity);

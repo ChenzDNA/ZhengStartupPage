@@ -1,5 +1,6 @@
 package com.zheng.zhengstartuppage.interceptor;
 
+import com.zheng.zhengstartuppage.config.WebApplicationContextConfig;
 import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import com.zheng.zhengstartuppage.model.UserModel;
 import com.zheng.zhengstartuppage.util.annotation.LoginMethod;
@@ -10,7 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,18 +23,16 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UrlInterceptor implements HandlerInterceptor {
 
-    @Resource
-    private UserModel userModel;
+    private final UserModel userModel = WebApplicationContextConfig.getBean(UserModel.class);
 
-    @Resource
-    private RedisTemplate<Object, Object> redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate = WebApplicationContextConfig.getBean("redisTemplate", RedisTemplate.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SessionUtil.setHttpSession(request.getSession());
         String ip = SessionUtil.getIpAddr(request);
         SessionUtil.setIP(ip);
-        if (redisTemplate.hasKey(ip)) {
+        if (!redisTemplate.hasKey(ip)) {
             redisTemplate.opsForValue().set(ip, 50);
         }
 
@@ -55,7 +53,6 @@ public class UrlInterceptor implements HandlerInterceptor {
                 return true;
             }
             out.write(AppResult.fail("未登录").toString().getBytes());
-            return false;
         } else {
             // 带 cookie 登录
             String value = userCookie.getValue();
@@ -71,7 +68,7 @@ public class UrlInterceptor implements HandlerInterceptor {
                 return true;
             }
             out.write(AppResult.fail("cookie 验证出错！").toString().getBytes());
-            return false;
         }
+        return false;
     }
 }
