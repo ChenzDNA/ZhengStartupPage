@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableSimbot
 @SpringBootApplication
 public class ZhengStartupPageApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ZhengStartupPageApplication.class, args);
     }
-
 }
