@@ -47,4 +47,13 @@ public class UserModel {
         userDataEntity.setCtime(new Date().getTime());
         return userDao.insertUserData(userDataEntity);
     }
+
+    public void updateUserLastLoginTime(long userId) {
+        UserDataEntity userDataEntity = new UserDataEntity();
+        userDataEntity.setUserId(userId);
+        long now = new Date().getTime();
+        userDataEntity.setLastLoginTime(now);
+        userDataEntity.setMtime(now);
+        userDao.updateUserDataByUserId(userDataEntity);
+    }
 }

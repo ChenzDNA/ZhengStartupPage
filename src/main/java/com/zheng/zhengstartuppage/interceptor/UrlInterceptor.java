@@ -40,7 +40,8 @@ public class UrlInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod handlerMethod)) {
             return true;
         }
-        response.setContentType("application/json;charset=utf-8");
+        response.setContentType("application/json; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
         if (SessionUtil.isLogin()) {
             return true;
         }

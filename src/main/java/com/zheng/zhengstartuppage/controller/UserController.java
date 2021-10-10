@@ -39,11 +39,13 @@ public class UserController {
                            Errors errors) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
         UserEntity sessionUser;
         if ((sessionUser = SessionUtil.getUser()) != null) {
+            UserDataEntity userDataEntity = userService.getUserDataByUserId(sessionUser.getId());
+            userService.updateUserLastLoginTime(sessionUser.getId());
             return AppResult.success()
                     .grab(sessionUser)
-                    .grab(userService.getUserDataByUserId(sessionUser.getId()));
+                    .grab(userDataEntity);
         }
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             return AppResult.fail("用户名或密码为空, 或含有特殊字符");
         }
         ReturnsData returnsData = userService.loginService(userEntity);
@@ -58,9 +60,13 @@ public class UserController {
     @LoginMethod
     @PostMapping("/register")
     public AppResult register(HttpServletResponse response,
-                              @Valid UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
-        ReturnsData returnsData = userService.registerService(userEntity);
+                              @Valid UserEntity userEntity,
+                              Errors errors) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
+        if (errors.hasErrors()) {
+            return AppResult.fail("用户名或密码为空, 或含有特殊字符");
+        }
 
+        ReturnsData returnsData = userService.registerService(userEntity);
         if (returnsData.getData() != null)
             response.addCookie(CookieUtil.generateUserCookie());
         return AppResult.success()

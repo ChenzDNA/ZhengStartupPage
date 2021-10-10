@@ -39,13 +39,17 @@ public class UserService {
         SessionUtil.setUser(realUser);
 
         UserDataEntity userDataEntity = userModel.getUserDataByUserId(realUser.getId());
+        userModel.updateUserLastLoginTime(realUser.getId());
+
         return ReturnsData.returns(realUser, userDataEntity);
     }
 
     public ReturnsData registerService(UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
-        if ((Integer) redisTemplate.opsForValue().get(SessionUtil.getIp()) < 0) {
+        int remainTimes = (Integer) redisTemplate.opsForValue().get(SessionUtil.getIp());
+        if (remainTimes < 1) {
             return ReturnsData.returns("过一段时间在来吧");
         }
+        redisTemplate.opsForValue().set(SessionUtil.getIp(), remainTimes - 1);
         if (userModel.hasUser(userEntity.getAccount())) {
             return ReturnsData.returns("已存在账号。");
         }
@@ -61,5 +65,9 @@ public class UserService {
 
     public UserDataEntity getUserDataByUserId(long userId) {
         return userModel.getUserDataByUserId(userId);
+    }
+
+    public void updateUserLastLoginTime(long userId){
+        userModel.updateUserLastLoginTime(userId);
     }
 }
