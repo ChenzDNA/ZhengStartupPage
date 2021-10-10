@@ -51,24 +51,24 @@ public interface UserDao {
     @Update("<script>" +
             "update user_data set " +
             "<if test = 'nickname != null'> nickname = #{nickname},</if>" +
-            "<if test = 'search_engine != null'> search_engine = #{search_engine},</if>" +
-            "<if test = 'city_name != null'> city_name = #{city_name},</if>" +
-            "<if test = 'second_display != 0'> second_display = #{second_display},</if>" +
-            "<if test = 'cat_display != 0'> cat_display = #{cat_display},</if>" +
-            "<if test = 'last_login_time != 0'> last_login_time = #{last_login_time},</if>" +
+            "<if test = 'searchEngine != null'> search_engine = #{searchEngine},</if>" +
+            "<if test = 'cityName != null'> city_name = #{cityName},</if>" +
+            "<if test = 'secondDisplay != 0'> second_display = #{secondDisplay},</if>" +
+            "<if test = 'catDisplay != 0'> cat_display = #{catDisplay},</if>" +
+            "<if test = 'lastLoginTime != 0'> last_login_time = #{lastLoginTime},</if>" +
             "mtime = #{mtime} " +
-            "where id = #{id}" +
+            "where user_id = #{userId}" +
             "</script>")
     void updateUserData(UserDataEntity userDataEntity);
 
     @Update("<script>" +
             "update user_data set " +
             "<if test = 'nickname != null'> nickname = #{nickname},</if>" +
-            "<if test = 'search_engine != null'> search_engine = #{search_engine},</if>" +
-            "<if test = 'city_name != null'> city_name = #{city_name},</if>" +
-            "<if test = 'second_display != 0'> second_display = #{second_display},</if>" +
-            "<if test = 'cat_display != 0'> cat_display = #{cat_display},</if>" +
-            "<if test = 'last_login_time != 0'> last_login_time = #{last_login_time},</if>" +
+            "<if test = 'searchEngine != null'> search_engine = #{searchEngine},</if>" +
+            "<if test = 'cityName != null'> city_name = #{cityName},</if>" +
+            "<if test = 'secondDisplay != 0'> second_display = #{secondDisplay},</if>" +
+            "<if test = 'catDisplay != 0'> cat_display = #{catDisplay},</if>" +
+            "<if test = 'lastLoginTime != 0'> last_login_time = #{lastLoginTime},</if>" +
             "mtime = #{mtime} " +
             "where user_id = #{userId}" +
             "</script>")
