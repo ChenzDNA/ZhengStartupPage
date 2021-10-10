@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,13 +21,13 @@ public class SessionUtil {
     @Setter
     private static HttpSession httpSession;
 
-    public static void setUser(UserEntity user) {
-        httpSession.setAttribute("SessionToken", hashToken(user.getAccount() + user.getPassword()));
+    public static void setUser(UserEntity user) throws IllegalBlockSizeException, BadPaddingException {
+        httpSession.setAttribute("SessionToken", encryptToken(user.getAccount() + user.getPassword()));
         httpSession.setAttribute("User", user);
     }
 
-    private static String hashToken(String data) {
-        return BCrypt.hashpw(data, BCrypt.gensalt());
+    private static String encryptToken(String data) throws IllegalBlockSizeException, BadPaddingException {
+        return DesUtil.encode(data);
     }
 
     public static UserEntity getUser() {
@@ -36,8 +38,8 @@ public class SessionUtil {
         return (String) httpSession.getAttribute("SessionToken");
     }
 
-    public static String getUserToken(UserEntity userEntity) {
-        return hashToken(userEntity.getAccount() + userEntity.getPassword());
+    public static String getUserToken(UserEntity userEntity) throws IllegalBlockSizeException, BadPaddingException {
+        return encryptToken(userEntity.getAccount() + userEntity.getPassword());
     }
 
     public static boolean isLogin() {
@@ -57,13 +59,13 @@ public class SessionUtil {
 
     public static String getIpAddr(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
-        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if(ip ==null || ip.length() ==0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
         return ip;

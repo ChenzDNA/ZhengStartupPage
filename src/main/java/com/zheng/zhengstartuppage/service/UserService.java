@@ -11,6 +11,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import java.util.Date;
 
 /**
@@ -26,7 +28,7 @@ public class UserService {
     @Resource
     private RedisTemplate<Object, Object> redisTemplate;
 
-    public ReturnsData loginService(UserEntity userEntity) throws IllegalResultClassException {
+    public ReturnsData loginService(UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
         if (!userModel.hasUser(userEntity.getAccount())) {
             return ReturnsData.returns("用户不存在。");
         }
@@ -40,7 +42,7 @@ public class UserService {
         return ReturnsData.returns(realUser, userDataEntity);
     }
 
-    public ReturnsData registerService(UserEntity userEntity) throws IllegalResultClassException {
+    public ReturnsData registerService(UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
         if ((Integer) redisTemplate.opsForValue().get(SessionUtil.getIp()) < 0) {
             return ReturnsData.returns("过一段时间在来吧");
         }

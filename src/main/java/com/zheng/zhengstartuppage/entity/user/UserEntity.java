@@ -4,6 +4,8 @@ import com.zheng.zhengstartuppage.entity.BaseEntity;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -17,9 +19,11 @@ public class UserEntity extends BaseEntity {
 
     long id;
 
-    @Pattern(regexp = "[0-9a-zA-Z]{6,16}")
+    @NotNull
+    @Pattern(regexp = "[0-9a-zA-Z]{4,16}")
     String account;
 
-    @Pattern(regexp = "[0-9a-zA-Z]{6,16}")
+    @NotNull
+    @Pattern(regexp = "[0-9a-zA-Z]{4,16}")
     String password;
 }

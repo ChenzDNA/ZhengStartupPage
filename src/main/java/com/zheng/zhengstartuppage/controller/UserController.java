@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -33,15 +35,21 @@ public class UserController {
     @LoginMethod
     @RequestMapping("/login")
     public AppResult login(HttpServletResponse response,
-                           @Valid UserEntity userEntity) throws IllegalResultClassException {
+                           @Valid UserEntity userEntity,
+                           Errors errors) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
         UserEntity sessionUser;
         if ((sessionUser = SessionUtil.getUser()) != null) {
             return AppResult.success()
                     .grab(sessionUser)
                     .grab(userService.getUserDataByUserId(sessionUser.getId()));
         }
+        if (errors.hasErrors()){
+            return AppResult.fail("用户名或密码为空, 或含有特殊字符");
+        }
         ReturnsData returnsData = userService.loginService(userEntity);
-        response.addCookie(CookieUtil.generateUserCookie());
+
+        if (returnsData.getData() != null)
+            response.addCookie(CookieUtil.generateUserCookie());
 
         return AppResult.success()
                 .grabAll(returnsData);
@@ -49,9 +57,12 @@ public class UserController {
 
     @LoginMethod
     @PostMapping("/register")
-    public AppResult register(HttpServletResponse response, @Valid UserEntity userEntity, Errors err) throws IllegalResultClassException {
+    public AppResult register(HttpServletResponse response,
+                              @Valid UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
         ReturnsData returnsData = userService.registerService(userEntity);
-        response.addCookie(CookieUtil.generateUserCookie());
+
+        if (returnsData.getData() != null)
+            response.addCookie(CookieUtil.generateUserCookie());
         return AppResult.success()
                 .grabAll(returnsData);
     }
