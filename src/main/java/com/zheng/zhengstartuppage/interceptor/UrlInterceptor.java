@@ -60,7 +60,7 @@ public class UrlInterceptor implements HandlerInterceptor {
             long id = Long.parseLong(value.substring(0, value.indexOf(CookieUtil.splitMark)));
             UserEntity userEntity;
             if ((userEntity = userModel.getUserById(id)) == null) {
-                out.write(AppResult.fail("cookie: 找不到用户").toString().getBytes());
+                out.write(AppResult.fail("无效的 cookie").toString().getBytes());
                 return false;
             }
             if (value.substring(value.indexOf(CookieUtil.splitMark) + CookieUtil.splitMark.length())
