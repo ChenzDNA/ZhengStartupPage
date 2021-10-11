@@ -57,7 +57,7 @@ public class UserService {
         userModel.insertUser(userEntity);
         SessionUtil.setUser(userEntity);
 
-        UserDataEntity userDataEntity = new UserDataEntity(userEntity.getId(), "新用户", new Date().getTime());
+        UserDataEntity userDataEntity = new UserDataEntity(userEntity.getId(), "新用户" + userEntity.getId(), new Date().getTime());
         userModel.insertUserData(userDataEntity);
 
         return ReturnsData.returns(userEntity, userDataEntity);
@@ -67,7 +67,7 @@ public class UserService {
         return userModel.getUserDataByUserId(userId);
     }
 
-    public void updateUserLastLoginTime(long userId){
+    public void updateUserLastLoginTime(long userId) {
         userModel.updateUserLastLoginTime(userId);
     }
 }
