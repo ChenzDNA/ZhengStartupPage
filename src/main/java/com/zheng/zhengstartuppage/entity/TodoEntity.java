@@ -10,5 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class TodoEntity extends BaseEntity{
+public class TodoEntity extends BaseEntity {
+    long id;
+
+    long user_id;
+
+    String content;
+
+    int finished;
 }

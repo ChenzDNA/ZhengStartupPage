@@ -11,4 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class CollectionEntity extends BaseEntity{
+    long id;
+
+    long userId;
+
+    String url;
+
+    String name;
+
+    String color;
 }

@@ -11,4 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class NoteEntity extends BaseEntity{
+    long id;
+
+    long userId;
+
+    String content;
+
+    String title;
 }
