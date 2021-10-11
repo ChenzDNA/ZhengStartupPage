@@ -73,4 +73,10 @@ public interface UserDao {
             "where user_id = #{userId}" +
             "</script>")
     void updateUserDataByUserId(UserDataEntity userDataEntity);
+
+    @Delete("delete from user where id=${id}")
+    void deleteUser(long id);
+
+    @Delete("delete from user_data where user_id=#{userId}")
+    void deleteUserData(long userId);
 }
