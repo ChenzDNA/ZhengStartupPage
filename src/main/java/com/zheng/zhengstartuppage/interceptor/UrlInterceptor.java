@@ -45,15 +45,14 @@ public class UrlInterceptor implements HandlerInterceptor {
         if (SessionUtil.isLogin()) {
             return true;
         }
-
+        if (!handlerMethod.hasMethodAnnotation(LoginMethod.class)) {
+            return false;
+        }
         final Cookie[] cookies = request.getCookies();
         Cookie userCookie;
         if ((userCookie = CookieUtil.verifyUserCookie(cookies)) == null) {
             // 填写账号密码登录
-            if (handlerMethod.hasMethodAnnotation(LoginMethod.class)) {
-                return true;
-            }
-            out.write(AppResult.fail("未登录").toString().getBytes());
+            return true;
         } else {
             // 带 cookie 登录
             String value = userCookie.getValue();
