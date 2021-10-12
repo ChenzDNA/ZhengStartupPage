@@ -45,7 +45,9 @@ public class UrlInterceptor implements HandlerInterceptor {
         if (SessionUtil.isLogin()) {
             return true;
         }
+
         if (!handlerMethod.hasMethodAnnotation(LoginMethod.class)) {
+            out.write(AppResult.fail("未登录").toString().getBytes());
             return false;
         }
         final Cookie[] cookies = request.getCookies();
