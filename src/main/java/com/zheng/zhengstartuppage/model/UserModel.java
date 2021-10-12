@@ -56,4 +56,9 @@ public class UserModel {
         userDataEntity.setMtime(now);
         userDao.updateUserDataByUserId(userDataEntity);
     }
+
+    public void updateUserData(UserDataEntity userDataEntity) {
+        userDataEntity.setMtime(new Date().getTime());
+        userDao.updateUserData(userDataEntity);
+    }
 }

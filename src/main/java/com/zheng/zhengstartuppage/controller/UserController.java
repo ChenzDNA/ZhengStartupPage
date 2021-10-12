@@ -20,6 +20,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Arrays;
 
 /**
  * @author : 陈征
@@ -80,4 +81,12 @@ public class UserController {
         return AppResult.success();
     }
 
+    @PostMapping("/updateUserData")
+    public AppResult updateUserData(@Valid UserDataEntity userDataEntity, Errors errors) throws IllegalResultClassException {
+        if (errors.hasErrors()) {
+            return AppResult.fail("含有特殊字符或密码为空");
+        }
+        return AppResult.success()
+                .grabAll(userService.updateUserData(userDataEntity));
+    }
 }

@@ -4,6 +4,7 @@ import com.zheng.zhengstartuppage.entity.BaseEntity;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -19,13 +20,13 @@ public class UserDataEntity extends BaseEntity {
 
     long userId;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
+    @Pattern(regexp = "[^;\u0020,:\"'%$()&]*")
     String nickname;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
+    @Pattern(regexp = "[^;\u0020,:\"'%$()&]*")
     String searchEngine;
 
-    @Pattern(regexp = "[^;\u0020\s,:\\\"\\\'$%\\$\\(\\)&]{6,16}")
+    @Pattern(regexp = "[^;\u0020,:\"'%$()&]*")
     String cityName;
 
     int secondDisplay;
@@ -33,6 +34,11 @@ public class UserDataEntity extends BaseEntity {
     int catDisplay;
 
     long lastLoginTime;
+
+    // 用于更新 userdata 时验证
+    @NotNull
+    @Pattern(regexp = "[0-9a-zA-Z]{4,16}")
+    String password;
 
     public UserDataEntity() {
     }

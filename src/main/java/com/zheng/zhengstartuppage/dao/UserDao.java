@@ -50,9 +50,9 @@ public interface UserDao {
 
     @Update("<script>" +
             "update user_data set " +
-            "<if test = 'nickname != null'> nickname = #{nickname},</if>" +
-            "<if test = 'searchEngine != null'> search_engine = #{searchEngine},</if>" +
-            "<if test = 'cityName != null'> city_name = #{cityName},</if>" +
+            "<if test = 'nickname != \"\"'> nickname = #{nickname},</if>" +
+            "<if test = 'searchEngine != \"\"'> search_engine = #{searchEngine},</if>" +
+            "<if test = 'cityName != \"\"'> city_name = #{cityName},</if>" +
             "<if test = 'secondDisplay != 0'> second_display = #{secondDisplay},</if>" +
             "<if test = 'catDisplay != 0'> cat_display = #{catDisplay},</if>" +
             "<if test = 'lastLoginTime != 0'> last_login_time = #{lastLoginTime},</if>" +

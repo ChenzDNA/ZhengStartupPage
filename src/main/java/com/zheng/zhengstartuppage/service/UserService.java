@@ -5,6 +5,8 @@ import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import com.zheng.zhengstartuppage.model.UserModel;
 import com.zheng.zhengstartuppage.util.SessionUtil;
+import com.zheng.zhengstartuppage.util.enums.EnumUtil;
+import com.zheng.zhengstartuppage.util.enums.SearchEngineEnum;
 import com.zheng.zhengstartuppage.util.returns.ReturnsData;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
+import javax.validation.Valid;
 import java.util.Date;
 
 /**
@@ -69,5 +72,17 @@ public class UserService {
 
     public void updateUserLastLoginTime(long userId) {
         userModel.updateUserLastLoginTime(userId);
+    }
+
+    public ReturnsData updateUserData(UserDataEntity userDataEntity) throws IllegalResultClassException {
+        userDataEntity.setUserId(SessionUtil.getUser().getId());
+        if (!BCrypt.checkpw(userDataEntity.getPassword(), SessionUtil.getUser().getPassword())) {
+            return ReturnsData.returns("密码验证错误");
+        }
+        if (!EnumUtil.verify(SearchEngineEnum.class, userDataEntity.getSearchEngine())){
+            return ReturnsData.returns("搜索引擎验证错误");
+        }
+        userModel.updateUserData(userDataEntity);
+        return ReturnsData.returns(userDataEntity);
     }
 }
