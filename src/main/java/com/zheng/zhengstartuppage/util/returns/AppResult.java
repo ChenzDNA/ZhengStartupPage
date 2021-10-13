@@ -1,11 +1,11 @@
 package com.zheng.zhengstartuppage.util.returns;
 
+import com.zheng.zhengstartuppage.entity.BaseEntity;
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import lombok.Data;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author : 陈征
@@ -36,24 +36,34 @@ public class AppResult {
         return this;
     }
 
-    public AppResult grab(Object data) throws IllegalResultClassException {
+    public <T extends BaseEntity> AppResult grab(T data) {
         this.data.put(getObjectClassName(data), data);
         return this;
     }
 
     public AppResult grabAll(ReturnsData returnsData) {
-        if (returnsData.getData() == null)
+        if (!returnsData.isSuccess())
             return fail(returnsData.getMessage());
-        this.data.putAll(returnsData.getData());
+        for (Object obj : returnsData.getData()) {
+            String className = getObjectClassName(obj);
+            if (this.data.containsKey(className)) {
+                Object o = this.data.get(className);
+                if (o instanceof List) {
+                    ((List) o).add(obj);
+                } else {
+                    this.data.put(className, new ArrayList(Collections.singletonList(o)));
+                }
+            } else {
+                this.data.put(getObjectClassName(obj), obj);
+            }
+        }
         return this;
     }
 
-    public static String getObjectClassName(Object obj) throws IllegalResultClassException {
+    public String getObjectClassName(Object obj) {
         String[] classPath = obj.getClass().toString().split("\\.");
         String className = classPath[classPath.length - 1];
         className = className.substring(0, 1).toLowerCase() + className.substring(1);
-        if (!"Entity".equals(className.substring(className.length() - 6)))
-            throw new IllegalResultClassException("非法的类型");
         return className.substring(0, className.length() - 6);
     }
 

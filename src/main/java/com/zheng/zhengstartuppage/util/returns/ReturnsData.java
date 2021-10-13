@@ -1,11 +1,11 @@
 package com.zheng.zhengstartuppage.util.returns;
 
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
-import lombok.Data;
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : 陈征
@@ -15,26 +15,28 @@ import java.util.Map;
 
 @Getter
 public class ReturnsData {
-    private Map<String, Object> data;
+    private List<Object> data;
 
     private String message;
 
-    private ReturnsData(Object... objects) throws IllegalResultClassException {
-        this.data = new HashMap<>();
-        for (Object obj : objects) {
-            this.data.put(AppResult.getObjectClassName(obj), obj);
-        }
+    private final boolean success;
+
+    private ReturnsData(boolean success, Object... objects) {
+        this.data = new ArrayList<>();
+        this.success = success;
+        this.data.addAll(Arrays.asList(objects));
     }
 
-    private ReturnsData(String message) {
+    private ReturnsData(boolean success, String message) {
+        this.success = success;
         this.message = message;
     }
 
-    public static ReturnsData returns(Object... objects) throws IllegalResultClassException {
-        return new ReturnsData(objects);
+    public static ReturnsData returns(Object... objects) {
+        return new ReturnsData(true, objects);
     }
 
-    public static ReturnsData returns(String message){
-        return new ReturnsData(message);
+    public static ReturnsData returns(String message) {
+        return new ReturnsData(false, message);
     }
 }
