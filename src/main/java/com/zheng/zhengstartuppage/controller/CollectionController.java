@@ -28,9 +28,9 @@ public class CollectionController {
         if (errors.hasErrors()) {
             return AppResult.fail("含有特殊字符");
         }
-        long id = collectionService.insertCollection(collectionEntity);
+        collectionService.insertCollection(collectionEntity);
         return AppResult.success()
-                .grab("id", id);
+                .grab("id", collectionEntity.getId());
     }
 
     @PostMapping("/delete")
