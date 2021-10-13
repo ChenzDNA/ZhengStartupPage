@@ -45,6 +45,9 @@ public class AppResult {
         if (!returnsData.isSuccess())
             return fail(returnsData.getMessage());
         for (Object obj : returnsData.getData()) {
+            if (!(obj instanceof BaseEntity)){
+                continue;
+            }
             String className = getObjectClassName(obj);
             if (this.data.containsKey(className)) {
                 Object o = this.data.get(className);
