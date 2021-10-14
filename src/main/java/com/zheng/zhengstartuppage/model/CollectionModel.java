@@ -2,6 +2,7 @@ package com.zheng.zhengstartuppage.model;
 
 import com.zheng.zhengstartuppage.dao.CollectionDao;
 import com.zheng.zhengstartuppage.entity.CollectionEntity;
+import com.zheng.zhengstartuppage.util.SessionUtil;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ public class CollectionModel {
     private CollectionDao collectionDao;
 
     public long insertCollection(CollectionEntity collectionEntity){
+        collectionEntity.setUserId(SessionUtil.getUser().getId());
         collectionEntity.setCtime(new Date().getTime());
         return collectionDao.insertCollection(collectionEntity);
     }

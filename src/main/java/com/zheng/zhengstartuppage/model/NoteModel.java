@@ -2,6 +2,7 @@ package com.zheng.zhengstartuppage.model;
 
 import com.zheng.zhengstartuppage.dao.NoteDao;
 import com.zheng.zhengstartuppage.entity.NoteEntity;
+import com.zheng.zhengstartuppage.util.SessionUtil;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ public class NoteModel {
     private NoteDao noteDao;
 
     public long insertNode(NoteEntity noteEntity) {
+        noteEntity.setUserId(SessionUtil.getUser().getId());
         noteEntity.setCtime(new Date().getTime());
         return noteDao.insertNote(noteEntity);
     }

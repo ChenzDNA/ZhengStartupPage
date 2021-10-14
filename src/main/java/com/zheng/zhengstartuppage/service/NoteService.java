@@ -20,7 +20,6 @@ public class NoteService {
     private NoteModel noteModel;
 
     public long insertNote(NoteEntity noteEntity) {
-        noteEntity.setUserId(SessionUtil.getUser().getId());
         return noteModel.insertNode(noteEntity);
     }
 

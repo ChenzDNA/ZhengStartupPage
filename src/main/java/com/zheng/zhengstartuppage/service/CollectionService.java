@@ -19,7 +19,6 @@ public class CollectionService {
     private CollectionModel collectionModel;
 
     public long insertCollection(CollectionEntity collectionEntity) {
-        collectionEntity.setUserId(SessionUtil.getUser().getId());
         return collectionModel.insertCollection(collectionEntity);
     }
 
