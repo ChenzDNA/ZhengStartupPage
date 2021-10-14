@@ -22,7 +22,7 @@ public interface CollectionDao {
     void deleteCollection(long id);
 
     @Select("select * from collection where user_id=#{userId}")
-    @Results(id = "todo", value = {
+    @Results(id = "collection", value = {
             @Result(column = "user_id", property = "userId"),
     })
     List<CollectionEntity> getCollectionsById(long userId);
