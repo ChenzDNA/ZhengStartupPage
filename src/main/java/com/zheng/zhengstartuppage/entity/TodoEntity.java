@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class TodoEntity extends BaseEntity {
     long id;
 
-    long user_id;
+    long userId;
 
     String content;
 

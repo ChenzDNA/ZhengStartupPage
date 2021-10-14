@@ -30,9 +30,13 @@ public interface NoteDao {
             "</script>")
     void updateNote(NoteEntity noteEntity);
 
-    @Select("select * from note where user_id=#{userId}")
-    @Results(id = "todo", value = {
+    @Select("select id, user_id, title, ctime, mtime from note where user_id=#{userId}")
+    @Results(id = "note", value = {
             @Result(column = "user_id", property = "userId"),
     })
-    List<NoteEntity> getNotesById(long userId);
+    List<NoteEntity> getNotesByUserId(long userId);
+
+    @Select("select * from note where id=#{id}")
+    @ResultMap("note")
+    NoteEntity getNoteById(long id);
 }
