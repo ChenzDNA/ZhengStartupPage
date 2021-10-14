@@ -54,7 +54,7 @@ public class AppResult {
                 if (o instanceof List) {
                     ((List) o).add(obj);
                 } else {
-                    this.data.put(className, new ArrayList(Collections.singletonList(o)));
+                    this.data.put(className, new ArrayList(Arrays.asList(o,obj)));
                 }
             } else {
                 this.data.put(getObjectClassName(obj), obj);
