@@ -23,8 +23,8 @@ public interface NoteDao {
 
     @Update("<script>" +
             "update note set " +
-            "<if test = 'content != null'> content = #{content},</if>" +
-            "<if test = 'title != null'> title = #{title},</if>" +
+            "<if test = 'content != \"\"'> content = #{content},</if>" +
+            "<if test = 'title != \"\"'> title = #{title},</if>" +
             "mtime = #{mtime} " +
             "where id = #{id}" +
             "</script>")

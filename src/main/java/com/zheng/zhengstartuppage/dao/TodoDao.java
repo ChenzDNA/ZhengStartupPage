@@ -18,21 +18,21 @@ public interface TodoDao {
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     long insertTodo(TodoEntity todoEntity);
 
-    @Select("select * from todo where user_id=#{userId}")
-    @Results(id = "todo", value = {
-            @Result(column = "user_id", property = "userId"),
-    })
-    List<TodoEntity> getTodosById(long userId);
-
     @Delete("delete from todo where id=#{id}")
     void deleteTodo(long id);
 
     @Update("<script>" +
             "update todo set " +
-            "<if test = 'content != null'> content = #{content},</if>" +
+            "<if test = 'content != \"\"'> content = #{content},</if>" +
             "<if test = 'finished != 0'> finished = #{finished},</if>" +
             "mtime = #{mtime} " +
             "where id = #{id}" +
             "</script>")
     void updateTodo(TodoEntity todoEntity);
+
+    @Select("select * from todo where user_id=#{userId}")
+    @Results(id = "todo", value = {
+            @Result(column = "user_id", property = "userId"),
+    })
+    List<TodoEntity> getTodosByUserId(long userId);
 }
