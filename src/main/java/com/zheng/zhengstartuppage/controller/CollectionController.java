@@ -38,10 +38,4 @@ public class CollectionController {
         return AppResult.success()
                 .grabAll(collectionService.deleteCollection(id));
     }
-
-    @GetMapping("/get")
-    public AppResult get() {
-        return AppResult.success()
-                .grabAll(collectionService.getCollections());
-    }
 }

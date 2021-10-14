@@ -3,6 +3,7 @@ package com.zheng.zhengstartuppage.controller;
 import com.zheng.zhengstartuppage.entity.user.UserDataEntity;
 import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
+import com.zheng.zhengstartuppage.service.CollectionService;
 import com.zheng.zhengstartuppage.service.UserService;
 import com.zheng.zhengstartuppage.util.returns.AppResult;
 import com.zheng.zhengstartuppage.util.CookieUtil;
@@ -33,6 +34,9 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private CollectionService collectionService;
+
     @LoginMethod
     @RequestMapping("/login")
     public AppResult login(HttpServletResponse response,
@@ -55,7 +59,8 @@ public class UserController {
             response.addCookie(CookieUtil.generateUserCookie());
 
         return AppResult.success()
-                .grabAll(returnsData);
+                .grabAll(returnsData)
+                .grabAll(collectionService.getCollections());
     }
 
     @LoginMethod
