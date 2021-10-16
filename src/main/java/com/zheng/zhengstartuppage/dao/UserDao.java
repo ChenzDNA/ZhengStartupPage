@@ -50,9 +50,9 @@ public interface UserDao {
 
     @Update("<script>" +
             "update user_data set " +
-            "<if test = 'nickname != \"\" && nickname != null'> nickname = #{nickname},</if>" +
-            "<if test = 'searchEngine != \"\" && searchEngine != null'> search_engine = #{searchEngine},</if>" +
-            "<if test = 'cityName != \"\" && cityName != null'> city_name = #{cityName},</if>" +
+            "<if test = 'nickname != \"\" and nickname != null'> nickname = #{nickname},</if>" +
+            "<if test = 'searchEngine != \"\" and searchEngine != null'> search_engine = #{searchEngine},</if>" +
+            "<if test = 'cityName != \"\" and cityName != null'> city_name = #{cityName},</if>" +
             "<if test = 'secondDisplay != 0'> second_display = #{secondDisplay},</if>" +
             "<if test = 'catDisplay != 0'> cat_display = #{catDisplay},</if>" +
             "<if test = 'lastLoginTime != 0'> last_login_time = #{lastLoginTime},</if>" +
@@ -63,9 +63,9 @@ public interface UserDao {
 
     @Update("<script>" +
             "update user_data set " +
-            "<if test = 'nickname != \"\" && nickname != null'> nickname = #{nickname},</if>" +
-            "<if test = 'searchEngine != \"\" && searchEngine != null'> search_engine = #{searchEngine},</if>" +
-            "<if test = 'cityName != \"\" && cityName != null'> city_name = #{cityName},</if>" +
+            "<if test = 'nickname != \"\" and nickname != null'> nickname = #{nickname},</if>" +
+            "<if test = 'searchEngine != \"\" and searchEngine != null'> search_engine = #{searchEngine},</if>" +
+            "<if test = 'cityName != \"\" and cityName != null'> city_name = #{cityName},</if>" +
             "<if test = 'secondDisplay != 0'> second_display = #{secondDisplay},</if>" +
             "<if test = 'catDisplay != 0'> cat_display = #{catDisplay},</if>" +
             "<if test = 'lastLoginTime != 0'> last_login_time = #{lastLoginTime},</if>" +

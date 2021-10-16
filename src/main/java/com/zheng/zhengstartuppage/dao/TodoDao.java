@@ -23,7 +23,7 @@ public interface TodoDao {
 
     @Update("<script>" +
             "update todo set " +
-            "<if test = 'content != \"\" && content != null'> content = #{content},</if>" +
+            "<if test = 'content != \"\" and content != null'> content = #{content},</if>" +
             "<if test = 'finished != 0'> finished = #{finished},</if>" +
             "mtime = #{mtime} " +
             "where id = #{id}" +
