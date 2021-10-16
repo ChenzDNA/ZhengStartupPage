@@ -41,11 +41,11 @@ public class NoteService {
 
     public ReturnsData getNotes() {
         long userId = SessionUtil.getUser().getId();
-        return ReturnsData.returns(noteModel.getNotesByUserId(userId));
+        return ReturnsData.returns(noteModel.getNotesByUserId(userId).toArray());
     }
 
     public ReturnsData getNote(long id) {
-        if (noteModel.getNoteUserIdById(id)!=SessionUtil.getUser().getId()){
+        if (noteModel.getNoteUserIdById(id) != SessionUtil.getUser().getId()) {
             return ReturnsData.returns("错误的用户！");
         }
         return ReturnsData.returns(noteModel.getNoteById(id));
