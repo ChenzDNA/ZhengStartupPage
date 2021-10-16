@@ -30,7 +30,7 @@ public interface NoteDao {
             "</script>")
     void updateNote(NoteEntity noteEntity);
 
-    @Select("select id, user_id, title, ctime, mtime from note where user_id=#{userId}")
+    @Select("select * from note where user_id=#{userId}")
     @Results(id = "note", value = {
             @Result(column = "user_id", property = "userId"),
     })
