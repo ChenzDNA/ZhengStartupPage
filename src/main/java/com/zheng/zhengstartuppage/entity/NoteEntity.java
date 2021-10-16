@@ -17,9 +17,7 @@ public class NoteEntity extends BaseEntity{
 
     long userId;
 
-    @Pattern(regexp = "[^\s<>]*")
     String content;
 
-    @Pattern(regexp = "[^\s<>]*")
     String title;
 }
