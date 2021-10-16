@@ -32,6 +32,6 @@ public class CollectionService {
 
     public ReturnsData getCollections() {
         long userId = SessionUtil.getUser().getId();
-        return ReturnsData.returns(collectionModel.getCollectionsById(userId).toArray());
+        return ReturnsData.returns(collectionModel.getCollectionsById(userId));
     }
 }

@@ -41,7 +41,7 @@ public class TodoService {
 
     public ReturnsData getTodos() {
         long userId = SessionUtil.getUser().getId();
-        return ReturnsData.returns(todoModel.getTodosByUserId(userId).toArray());
+        return ReturnsData.returns(todoModel.getTodosByUserId(userId));
     }
 
 }

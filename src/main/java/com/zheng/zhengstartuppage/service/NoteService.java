@@ -41,7 +41,7 @@ public class NoteService {
 
     public ReturnsData getNotes() {
         long userId = SessionUtil.getUser().getId();
-        return ReturnsData.returns(noteModel.getNotesByUserId(userId).toArray());
+        return ReturnsData.returns(noteModel.getNotesByUserId(userId));
     }
 
     public ReturnsData getNote(long id) {

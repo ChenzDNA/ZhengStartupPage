@@ -45,20 +45,16 @@ public class AppResult {
         if (!returnsData.isSuccess())
             return fail(returnsData.getMessage());
         for (Object obj : returnsData.getData()) {
-            if (!(obj instanceof BaseEntity)){
+            if (obj instanceof List listObj) {
+                if (listObj.size() > 0 && (listObj.get(0) instanceof BaseEntity)) {
+                    this.data.put(getObjectClassName(listObj.get(0)), listObj);
+                }
                 continue;
             }
-            String className = getObjectClassName(obj);
-            if (this.data.containsKey(className)) {
-                Object o = this.data.get(className);
-                if (o instanceof List) {
-                    ((List) o).add(obj);
-                } else {
-                    this.data.put(className, new ArrayList(Arrays.asList(o,obj)));
-                }
-            } else {
-                this.data.put(getObjectClassName(obj), obj);
+            if (!(obj instanceof BaseEntity)) {
+                continue;
             }
+            this.data.put(getObjectClassName(obj), obj);
         }
         return this;
     }
