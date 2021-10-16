@@ -35,4 +35,7 @@ public interface TodoDao {
             @Result(column = "user_id", property = "userId"),
     })
     List<TodoEntity> getTodosByUserId(long userId);
+
+    @Select("select user_id from todo where id=#{id}")
+    long getTodoUserById(long id);
 }
