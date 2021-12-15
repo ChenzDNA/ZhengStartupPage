@@ -56,10 +56,7 @@ public class UserController {
             userService.updateUserLastLoginTime(sessionUser.getId());
             return AppResult.success()
                     .grab(sessionUser)
-                    .grab(userDataEntity)
-                    .grabAll(collectionService.getCollections())
-                    .grabAll(noteService.getNotes())
-                    .grabAll(todoService.getTodos());
+                    .grab(userDataEntity);
         }
         if (errors.hasErrors()) {
             return AppResult.fail("用户名或密码为空, 或含有特殊字符");
@@ -70,10 +67,7 @@ public class UserController {
             response.addCookie(CookieUtil.generateUserCookie());
 
         return AppResult.success()
-                .grabAll(returnsData)
-                .grabAll(collectionService.getCollections())
-                .grabAll(noteService.getNotes())
-                .grabAll(todoService.getTodos());
+                .grabAll(returnsData);
     }
 
     @LoginMethod

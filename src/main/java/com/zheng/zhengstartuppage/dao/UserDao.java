@@ -37,6 +37,12 @@ public interface UserDao {
             @Result(column = "second_display", property = "secondDisplay"),
             @Result(column = "cat_display", property = "catDisplay"),
             @Result(column = "last_login_time", property = "lastLoginTime"),
+            @Result(column = "user_id", property = "collections",
+                    many = @Many(select = "com.zheng.zhengstartuppage.dao.CollectionDao.getCollectionsById")),
+            @Result(column = "user_id", property = "notes",
+                    many = @Many(select = "com.zheng.zhengstartuppage.dao.NoteDao.getNotesByUserId")),
+            @Result(column = "user_id", property = "todos",
+                    many = @Many(select = "com.zheng.zhengstartuppage.dao.TodoDao.getTodosByUserId")),
     })
     UserDataEntity getUserDataByUser(long userId);
 

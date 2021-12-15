@@ -1,11 +1,15 @@
 package com.zheng.zhengstartuppage.entity.user;
 
 import com.zheng.zhengstartuppage.entity.BaseEntity;
+import com.zheng.zhengstartuppage.entity.CollectionEntity;
+import com.zheng.zhengstartuppage.entity.NoteEntity;
+import com.zheng.zhengstartuppage.entity.TodoEntity;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * @author : 陈征
@@ -39,6 +43,12 @@ public class UserDataEntity extends BaseEntity {
     @NotNull
     @Pattern(regexp = "[0-9a-zA-Z]{4,16}")
     String password;
+
+    private List<CollectionEntity> collections;
+
+    private List<NoteEntity> notes;
+
+    private List<TodoEntity> todos;
 
     public UserDataEntity() {
     }
