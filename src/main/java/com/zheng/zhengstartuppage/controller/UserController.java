@@ -3,9 +3,6 @@ package com.zheng.zhengstartuppage.controller;
 import com.zheng.zhengstartuppage.entity.user.UserDataEntity;
 import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
-import com.zheng.zhengstartuppage.service.CollectionService;
-import com.zheng.zhengstartuppage.service.NoteService;
-import com.zheng.zhengstartuppage.service.TodoService;
 import com.zheng.zhengstartuppage.service.UserService;
 import com.zheng.zhengstartuppage.util.returns.AppResult;
 import com.zheng.zhengstartuppage.util.CookieUtil;
@@ -13,7 +10,6 @@ import com.zheng.zhengstartuppage.util.SessionUtil;
 import com.zheng.zhengstartuppage.util.annotation.LoginMethod;
 import com.zheng.zhengstartuppage.util.returns.ReturnsData;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +19,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Arrays;
 
 /**
  * @author : 陈征
@@ -35,15 +30,6 @@ import java.util.Arrays;
 public class UserController {
     @Resource
     private UserService userService;
-
-    @Resource
-    private CollectionService collectionService;
-
-    @Resource
-    private TodoService todoService;
-
-    @Resource
-    private NoteService noteService;
 
     @LoginMethod
     @RequestMapping("/login")
