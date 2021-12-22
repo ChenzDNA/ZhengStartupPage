@@ -15,10 +15,13 @@ import javax.annotation.Resource;
 @Configuration
 @EnableScheduling
 public class ScheduleConfig {
-    private RedisTemplate redisTemplate = WebApplicationContextConfig.getBean("redisTemplate", RedisTemplate.class);
+    private RedisTemplate redisTemplate;
 
     @Scheduled(cron = "0 0 1 * * ?")
     private void addRedisToken() {
+        if (redisTemplate == null) {
+            redisTemplate = WebApplicationContextConfig.getBean("redisTemplate", RedisTemplate.class);
+        }
         redisTemplate.keys("*").forEach((key) -> {
             if (((Integer) redisTemplate.opsForValue().get(key) < 1)) {
                 redisTemplate.opsForValue().set(key, 50);

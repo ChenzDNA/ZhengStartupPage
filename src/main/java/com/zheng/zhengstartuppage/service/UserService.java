@@ -31,9 +31,9 @@ public class UserService {
     @Resource
     private RedisTemplate<Object, Object> redisTemplate;
 
-    public ReturnsData loginService(UserEntity userEntity) throws IllegalResultClassException, IllegalBlockSizeException, BadPaddingException {
+    public ReturnsData loginService(UserEntity userEntity) throws IllegalBlockSizeException, BadPaddingException {
         if (!userModel.hasUser(userEntity.getAccount())) {
-            return ReturnsData.returns("用户不存在。");
+            return ReturnsData.returns("用户不存在：" + userEntity.getAccount());
         }
         UserEntity realUser = userModel.getUserByAccount(userEntity.getAccount());
         if (!BCrypt.checkpw(userEntity.getPassword(), realUser.getPassword())) {
@@ -79,7 +79,7 @@ public class UserService {
         if (!BCrypt.checkpw(userDataEntity.getPassword(), SessionUtil.getUser().getPassword())) {
             return ReturnsData.returns("密码验证错误");
         }
-        if (!EnumUtil.verify(SearchEngineEnum.class, userDataEntity.getSearchEngine())){
+        if (!EnumUtil.verify(SearchEngineEnum.class, userDataEntity.getSearchEngine())) {
             return ReturnsData.returns("搜索引擎验证错误");
         }
         userModel.updateUserData(userDataEntity);
