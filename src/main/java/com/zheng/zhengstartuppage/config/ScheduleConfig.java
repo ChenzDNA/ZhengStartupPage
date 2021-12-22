@@ -21,7 +21,8 @@ public class ScheduleConfig {
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void addRedisToken() {
-        Objects.requireNonNull(redisTemplate.keys("*")).forEach((key) -> {
+        Objects.requireNonNull(redisTemplate.keys("*"))
+                .forEach((key) -> {
             if (((Integer) redisTemplate.opsForValue().get(key) < 1)) {
                 redisTemplate.opsForValue().set(key, 50);
             }
