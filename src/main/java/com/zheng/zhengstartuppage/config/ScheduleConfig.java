@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @author : 陈征
@@ -16,11 +17,11 @@ import javax.annotation.Resource;
 @EnableScheduling
 public class ScheduleConfig {
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void addRedisToken() {
-        redisTemplate.keys("*").forEach((key) -> {
+        Objects.requireNonNull(redisTemplate.keys("*")).forEach((key) -> {
             if (((Integer) redisTemplate.opsForValue().get(key) < 1)) {
                 redisTemplate.opsForValue().set(key, 50);
             }
