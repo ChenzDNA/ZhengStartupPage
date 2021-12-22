@@ -47,14 +47,6 @@ public interface UserDao {
     UserDataEntity getUserDataByUser(long userId);
 
     @Update("<script>" +
-            "update user set " +
-            "<if test = 'password != null'> password = #{password},</if>" +
-            "mtime = #{mtime} " +
-            "where id = #{id}" +
-            "</script>")
-    void updateUser(UserEntity userEntity);
-
-    @Update("<script>" +
             "update user_data set " +
             "<if test = 'nickname != \"\" and nickname != null'> nickname = #{nickname},</if>" +
             "<if test = 'searchEngine != \"\" and searchEngine != null'> search_engine = #{searchEngine},</if>" +
@@ -79,10 +71,4 @@ public interface UserDao {
             "where user_id = #{userId}" +
             "</script>")
     void updateUserDataByUserId(UserDataEntity userDataEntity);
-
-    @Delete("delete from user where id=${id}")
-    void deleteUser(long id);
-
-    @Delete("delete from user_data where user_id=#{userId}")
-    void deleteUserData(long userId);
 }

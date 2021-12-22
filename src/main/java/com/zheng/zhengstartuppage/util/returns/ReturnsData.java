@@ -1,6 +1,5 @@
 package com.zheng.zhengstartuppage.util.returns;
 
-import com.zheng.zhengstartuppage.exception.IllegalResultClassException;
 import lombok.Getter;
 
 import java.util.ArrayList;

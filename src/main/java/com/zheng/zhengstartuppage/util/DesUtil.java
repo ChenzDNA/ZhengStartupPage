@@ -7,7 +7,6 @@ import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.Date;
 
 /**
  * @author : 陈征

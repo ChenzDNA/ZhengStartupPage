@@ -3,7 +3,6 @@ package com.zheng.zhengstartuppage.model;
 import com.zheng.zhengstartuppage.dao.TodoDao;
 import com.zheng.zhengstartuppage.entity.TodoEntity;
 import com.zheng.zhengstartuppage.util.SessionUtil;
-import com.zheng.zhengstartuppage.util.returns.ReturnsData;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

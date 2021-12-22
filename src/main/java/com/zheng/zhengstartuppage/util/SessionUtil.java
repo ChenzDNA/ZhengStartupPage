@@ -4,7 +4,6 @@ package com.zheng.zhengstartuppage.util;
 import com.zheng.zhengstartuppage.entity.user.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.mindrot.jbcrypt.BCrypt;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
