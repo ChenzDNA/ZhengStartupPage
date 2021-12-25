@@ -5,7 +5,6 @@ import com.zheng.zhengstartuppage.entity.CollectionEntity;
 import com.zheng.zhengstartuppage.entity.NoteEntity;
 import com.zheng.zhengstartuppage.entity.TodoEntity;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -16,7 +15,6 @@ import java.util.List;
  * @date : 2021-09-30 20:21
  */
 
-@Component
 @Data
 public class UserDataEntity extends BaseEntity {
 

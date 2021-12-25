@@ -2,7 +2,6 @@ package com.zheng.zhengstartuppage.entity.user;
 
 import com.zheng.zhengstartuppage.entity.BaseEntity;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +11,6 @@ import javax.validation.constraints.Pattern;
  * @date : 2021-09-30 20:21
  */
 
-@Component
 @Data
 public class UserEntity extends BaseEntity {
 
