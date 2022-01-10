@@ -2,6 +2,8 @@
 
 是 <a href="https://github.com/ChenzDNA/zheng-startup-page">zheng-startup-page</a> 的后端
 
+待重构。
+
 ## 使用
 
 <li> springboot
@@ -9,5 +11,3 @@
 <li> mysql (mariadb)
 <li> des, bcrypt
 <li> redis
-
-预计会使用 simbot 来给qq发消息，做日程提醒之类的
